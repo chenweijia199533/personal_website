@@ -1,29 +1,80 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "@/views/home";
+import Login from "@/views/Login/login";
+import Layout from "@/views/Layout/index";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
+const About = () => import("@/views/about");
+const News = () => import("@/views/News");
+const Travel = () => import("@/views/Travel/travel");
+const Musicw = () => import("@/views/music/m_works");
+const Song = () => import("@/views/songs/songs");
+const Article = () => import("@/views/Articles");
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "",
+    component: Layout,
+    children: [
+      {
+        path: "/",
+        component: Home,
+      },
+      {
+        path: "/about",
+        component: About,
+        meta: {
+          isLogin: true,
+        },
+      },
+      {
+        path: "/news",
+        component: News,
+        meta: {
+          isLogin: true,
+        },
+      },
+      {
+        path: "/travel",
+        component: Travel,
+        meta: {
+          isLogin: true,
+        },
+      },
+      {
+        path: "/music",
+        component: Musicw,
+        meta: {
+          isLogin: true,
+        },
+      },
+      {
+        path: "/songs",
+        component: Song,
+        meta: {
+          isLogin: true,
+        },
+      },
+      {
+        path: "/atricles",
+        component: Article,
+        meta: {
+          isLogin: true,
+        },
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/login",
+    component: Login,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
